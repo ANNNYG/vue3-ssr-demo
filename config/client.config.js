@@ -11,6 +11,8 @@ module.exports = merge(baseConfig, {
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "../build/client"),
+    // asyncChunks: false,
+    clean: true,
   },
   plugins: [
     new DefinePlugin({

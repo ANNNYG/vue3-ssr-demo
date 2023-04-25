@@ -11,6 +11,7 @@ module.exports = merge(baseConfig, {
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "../build/server"),
+    clean: true, // 在生成文件之前清空 output 目录
   },
   externals: [nodeExternals()], // 排除node-modules中的一些包 针对node环境s
 });

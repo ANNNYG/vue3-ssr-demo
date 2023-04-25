@@ -1,13 +1,23 @@
 let express = require("express");
 let server = express();
-import createApp from "../index.js";
 import { renderToString } from "vue/server-renderer";
+import { createMemoryHistory } from "vue-router";
+
+import createApp from "../index.js";
+import createRouter from "../router";
 
 // 静态资源的部署
 server.use(express.static("build"));
 
-server.get("/", async (req, res) => {
+server.get("/*", async (req, res) => {
   const app = createApp();
+
+  // 安装路由
+  const router = createRouter(createMemoryHistory());
+  app.use(router);
+  await router.push(req.url || "/"); // 等待页面跳转好
+  await router.isReady(); // 等待路由加载完成，再渲染页面
+
   let appString = await renderToString(app);
   res.send(`
   <!DOCTYPE html>
