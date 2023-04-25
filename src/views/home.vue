@@ -7,9 +7,13 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { storeToRefs } from "pinia";
 
-const count = ref(0);
+import { useHomeStore } from "../store/home";
+
+const homeStore = useHomeStore();
+const { count } = storeToRefs(homeStore);
+
 function addCount() {
   count.value++;
 }

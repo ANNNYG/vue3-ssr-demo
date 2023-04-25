@@ -2,6 +2,7 @@ let express = require("express");
 let server = express();
 import { renderToString } from "vue/server-renderer";
 import { createMemoryHistory } from "vue-router";
+import { createPinia } from "pinia";
 
 import createApp from "../index.js";
 import createRouter from "../router";
@@ -17,6 +18,10 @@ server.get("/*", async (req, res) => {
   app.use(router);
   await router.push(req.url || "/"); // 等待页面跳转好
   await router.isReady(); // 等待路由加载完成，再渲染页面
+
+  // pinia
+  const pinia = createPinia();
+  app.use(pinia);
 
   let appString = await renderToString(app);
   res.send(`
