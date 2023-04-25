@@ -4,8 +4,8 @@
     <div>{{ count }}</div>
     <button @click="addCount">+1</button>
     <div>
-      <router-link to="/">Home</router-link>
-      <router-link to="/about">About</router-link>
+      <router-link to="/"><button>home</button></router-link>
+      <router-link to="/about"><button>about</button></router-link>
     </div>
     <router-view />
   </div>
